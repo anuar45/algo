@@ -43,10 +43,14 @@ type ListNode struct {
 	Next *ListNode
 }
 
+func printList(l *ListNode) {
+	t := l
+}
+
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	var l ListNode
+	l := new(ListNode)
 	var carry, x, y int
-	p, q, r := l1, l2, &l
+	p, q, r := l1, l2, l
 	for p != nil || q != nil {
 		if p.Next == nil {
 			x = 0
@@ -76,7 +80,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 		l.Next = &t
 		fmt.Println(l)
-		l = *l.Next
+		l = l.Next
 		p = p.Next
 		q = q.Next
 	}
