@@ -3,12 +3,12 @@ package main
 import "fmt"
 
 func main() {
-	var l1n1 = ListNode{Val: 5, Next: nil}
-	var l1n2 = ListNode{Val: 7, Next: nil}
+	var l1n1 = ListNode{Val: 9, Next: nil}
+	var l1n2 = ListNode{Val: 9, Next: nil}
 	var l1n3 = ListNode{Val: 9, Next: nil}
-	var l2n1 = ListNode{Val: 3, Next: nil}
-	var l2n2 = ListNode{Val: 5, Next: nil}
-	var l2n3 = ListNode{Val: 7, Next: nil}
+	var l2n1 = ListNode{Val: 9, Next: nil}
+	var l2n2 = ListNode{Val: 9, Next: nil}
+	var l2n3 = ListNode{Val: 9, Next: nil}
 
 	l1 := l1n1
 	l1.Next = &l1n2
@@ -18,23 +18,9 @@ func main() {
 	l2.Next.Next = &l2n3
 	result := addTwoNumbers(&l1, &l2)
 
-	fmt.Println(
-		l1.Val,
-		l1.Next.Val,
-		l1.Next.Next.Val,
-	)
-
-	fmt.Println(
-		l2.Val,
-		l2.Next.Val,
-		l2.Next.Next.Val,
-	)
-
-	fmt.Println(
-		result.Val,
-		result.Next.Val,
-		//result.Next.Next.Val,
-	)
+	printList(&l1)
+	printList(&l2)
+	printList(result)
 }
 
 // Definition for singly-linked list.
@@ -44,20 +30,24 @@ type ListNode struct {
 }
 
 func printList(l *ListNode) {
-	t := l
+	for l != nil {
+		fmt.Print(l.Val)
+		l = l.Next
+	}
+	fmt.Println()
 }
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	l := new(ListNode)
 	var carry, x, y int
 	p, q, r := l1, l2, l
-	for p != nil || q != nil {
-		if p.Next == nil {
+	for p != nil || q != nil || carry != 0 {
+		if p == nil {
 			x = 0
 		} else {
 			x = p.Val
 		}
-		if q.Next == nil {
+		if q == nil {
 			y = 0
 		} else {
 			y = q.Val
@@ -66,24 +56,22 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		sum := x + y + carry
 		carry = sum / 10
 
-		fmt.Printf("%p\n", &l)
-
 		if sum >= 10 {
 			l.Val = sum - 10
 		} else {
 			l.Val = sum
 		}
-
-		var t ListNode
-
-		fmt.Println(l)
-
-		l.Next = &t
-		fmt.Println(l)
-		l = l.Next
-		p = p.Next
-		q = q.Next
+		if p != nil && q != nil {
+			var t ListNode
+			l.Next = &t
+			l = l.Next
+		}
+		if p != nil {
+			p = p.Next
+		}
+		if q != nil {
+			q = q.Next
+		}
 	}
-	l.Next = nil
 	return r
 }
