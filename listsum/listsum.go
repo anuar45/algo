@@ -44,9 +44,9 @@ type ListNode struct {
 }
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	var l *ListNode
+	var l ListNode
 	var carry, x, y int
-	p, q, r := l1, l2, l
+	p, q, r := l1, l2, &l
 	for p != nil || q != nil {
 		if p.Next == nil {
 			x = 0
@@ -62,18 +62,24 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		sum := x + y + carry
 		carry = sum / 10
 
-		var t ListNode
+		fmt.Printf("%p\n", &l)
+
 		if sum >= 10 {
-			t.Val = sum - 10
+			l.Val = sum - 10
 		} else {
-			t.Val = sum
+			l.Val = sum
 		}
 
-		l = &t
+		var t ListNode
 
-		l = l.Next
+		fmt.Println(l)
+
+		l.Next = &t
+		fmt.Println(l)
+		l = *l.Next
 		p = p.Next
 		q = q.Next
 	}
-	return l
+	l.Next = nil
+	return r
 }
