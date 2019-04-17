@@ -3,12 +3,12 @@ package main
 import "fmt"
 
 func main() {
-	var l1n1 = ListNode{Val: 9, Next: nil}
-	var l1n2 = ListNode{Val: 9, Next: nil}
-	var l1n3 = ListNode{Val: 9, Next: nil}
-	var l2n1 = ListNode{Val: 9, Next: nil}
-	var l2n2 = ListNode{Val: 9, Next: nil}
-	var l2n3 = ListNode{Val: 9, Next: nil}
+	var l1n1 = ListNode{Val: 2, Next: nil}
+	var l1n2 = ListNode{Val: 3, Next: nil}
+	var l1n3 = ListNode{Val: 4, Next: nil}
+	var l2n1 = ListNode{Val: 2, Next: nil}
+	var l2n2 = ListNode{Val: 3, Next: nil}
+	var l2n3 = ListNode{Val: 4, Next: nil}
 
 	l1 := l1n1
 	l1.Next = &l1n2
@@ -62,9 +62,11 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			l.Val = sum
 		}
 		if p != nil && q != nil {
-			var t ListNode
-			l.Next = &t
-			l = l.Next
+			if p.Next != nil && q.Next != nil {
+				var t ListNode
+				l.Next = &t
+				l = l.Next
+			}
 		}
 		if p != nil {
 			p = p.Next
