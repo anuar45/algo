@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -34,49 +32,41 @@ type Photo struct {
 }
 
 func main() {
-	log.SetOutput(os.Stdout)
 	fmt.Println(photosStr)
 	photos := parsePhotos(photosStr)
-	fmt.Println(photos)
 
 	sortPhotosByDate(photos)
-	fmt.Println(photos)
 
 	cityCount := countPhotosInCity(photos)
-	fmt.Println(cityCount)
 
 	renamePhotos(photos, cityCount)
-	fmt.Println(photos)
 
+	printPhotos(photos)
 }
 
-func renamePhotos(photos []Photo, cityCount map[string]int) {
-	photoNum := 1
-	var zerosPrefix string
-	for city, count := range cityCount {
-		fmt.Println(city, count)
-		zerosPrefix = getZerosStr(count)
-		fmt.Println("zerosPrefix", zerosPrefix)
-		for i := 0; i < len(photos); i++ {
-			if photos[i].City == city {
-				fmt.Println("photo:", photos[i])
-				photoNumStr := strconv.Itoa(photoNum)
-				extName := photos[i].Name[len(photos[i].Name)-4:]
-				photos[i].Name = photos[i].City + zerosPrefix + photoNumStr + extName
+func printPhotos(photos []Photo) {
+	for i := 0; i < len(photos); i++ {
+		for j := 0; j < len(photos); j++ {
+			if photos[j].Order == i {
+				fmt.Println(photos[j].Name)
 			}
-			photoNum++
 		}
 	}
 }
 
-func getZerosStr(num int) string {
-	numStr := strconv.Itoa(num)
-
-	var s string
-	for i := 0; i < len(numStr)-1; i++ {
-		s += "0"
+func renamePhotos(photos []Photo, cityCount map[string]int) {
+	for city, count := range cityCount {
+		photoNum := 1
+		numLen := len(strconv.Itoa(count))
+		for i := 0; i < len(photos); i++ {
+			if photos[i].City == city {
+				photoNumStr := strconv.Itoa(photoNum)
+				extName := photos[i].Name[len(photos[i].Name)-4:]
+				photos[i].Name = fmt.Sprintf("%s%0*s%s", photos[i].City, numLen, photoNumStr, extName)
+				photoNum++
+			}
+		}
 	}
-	return s
 }
 
 func countPhotosInCity(photos []Photo) map[string]int {
