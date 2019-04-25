@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"time"
 )
 
@@ -10,6 +11,8 @@ func main() {
 
 	fmt.Println(sortBubble(input))
 	fmt.Println(sortBubbleOpt(input))
+	fmt.Println(sortStd(input))
+
 }
 
 func sortBubble(input []int) []int {
@@ -47,6 +50,16 @@ func sortBubbleOpt(input []int) []int {
 		}
 	}
 	bench := time.Since(tStart)
+	fmt.Println(bench)
+	return arr
+}
+
+func sortStd(input []int) []int {
+	arr := make([]int, len(input))
+	copy(arr, input)
+	start := time.Now()
+	sort.Ints(arr)
+	bench := time.Since(start)
 	fmt.Println(bench)
 	return arr
 }
