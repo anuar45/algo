@@ -8,11 +8,12 @@ import (
 
 func main() {
 	input := []int{4, 9, 6, 1, 3, 7, 5, 8}
-
+	animals := []string{"tiger", "lion", "cat", "cheetah"}
 	fmt.Println(sortBubble(input))
 	fmt.Println(sortBubbleOpt(input))
 	fmt.Println(sortStd(input))
-
+	fmt.Println(sortBubbleString(animals))
+	fmt.Println(sortBubbleReverse(input))
 }
 
 func sortBubble(input []int) []int {
@@ -60,6 +61,48 @@ func sortStd(input []int) []int {
 	start := time.Now()
 	sort.Ints(arr)
 	bench := time.Since(start)
+	fmt.Println(bench)
+	return arr
+}
+
+func sortBubbleString(input []string) []string {
+	arr := make([]string, len(input))
+	copy(arr, input)
+	var isSorted bool
+	tStart := time.Now()
+	for i := 0; i < len(arr) || !isSorted; i++ {
+		isSorted = true
+		for j, k := 0, 1; k < len(arr)-i; {
+			if arr[k] < arr[j] {
+				arr[j], arr[k] = arr[k], arr[j]
+				isSorted = false
+			}
+			j++
+			k++
+		}
+	}
+	bench := time.Since(tStart)
+	fmt.Println(bench)
+	return arr
+}
+
+func sortBubbleReverse(input []int) []int {
+	arr := make([]int, len(input))
+	copy(arr, input)
+	var isSorted bool
+	tStart := time.Now()
+	for i := 0; i < len(arr) || !isSorted; i++ {
+		isSorted = true
+		for j, k := 0, 1; k < len(arr)-i; {
+			if arr[k] > arr[j] {
+				arr[j], arr[k] = arr[k], arr[j]
+				isSorted = false
+			}
+			j++
+			k++
+		}
+	}
+	bench := time.Since(tStart)
 	fmt.Println(bench)
 	return arr
 }
