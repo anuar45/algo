@@ -11,6 +11,7 @@ func main() {
 	var l2n3 = ListNode{Val: 4, Next: nil}
 	var l3n1 = ListNode{Val: 5, Next: nil}
 	var l4n1 = ListNode{Val: 5, Next: nil}
+	var l5n1 = ListNode{Val: 0, Next: nil}
 
 	l1 := l1n1
 	l1.Next = &l1n2
@@ -20,8 +21,10 @@ func main() {
 	l2.Next.Next = &l2n3
 	l3 := l3n1
 	l4 := l4n1
+	l5 := l5n1
 	result1 := addTwoNumbers(&l1, &l2)
 	result2 := addTwoNumbers(&l3, &l4)
+	result3 := addTwoNumbers(&l1, &l5)
 
 	printList(&l1)
 	printList(&l2)
@@ -29,6 +32,9 @@ func main() {
 	printList(&l3)
 	printList(&l4)
 	printList(result2)
+	printList(&l1)
+	printList(&l5)
+	printList(result3)
 }
 
 // Definition for singly-linked list.
@@ -49,31 +55,25 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	l := new(ListNode)
 	var carry, x, y int
 	p, q, r := l1, l2, l
-	for p != nil || q != nil || carry != 0 {
-		if p == nil {
-			x = 0
-		} else {
+	for p != nil || q != nil {
+		if p != nil {
 			x = p.Val
-		}
-		if q == nil {
-			y = 0
 		} else {
+			x = 0
+		}
+		if q != nil {
 			y = q.Val
+		} else {
+			y = 0
 		}
 
 		sum := x + y + carry
 		carry = sum / 10
+		r.Val = sum % 10
 
-		if sum >= 10 {
-			l.Val = sum - 10
-		} else {
-			l.Val = sum
-		}
+		r.Next = new(ListNode)
+		r = r.Next
 
-		l.Next = new(ListNode)
-		l = l.Next
-
-		// Switch to next nodes
 		if p != nil {
 			p = p.Next
 		}
@@ -81,5 +81,9 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			q = q.Next
 		}
 	}
-	return r
+	if carry == 1 {
+		r.Next = new(ListNode)
+		r.Next.Val = 1
+	}
+	return l.Next
 }
