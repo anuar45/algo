@@ -69,10 +69,10 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 		sum := x + y + carry
 		carry = sum / 10
-		r.Val = sum % 10
 
 		r.Next = new(ListNode)
 		r = r.Next
+		r.Val = sum % 10
 
 		if p != nil {
 			p = p.Next
