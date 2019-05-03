@@ -16,6 +16,8 @@ func main() {
 	//fmt.Println(isStrCharsUnique("abcddefgh"))
 }
 
+// Given a string, find the length of the longest substring without repeating characters.
+
 func lengthOfLongestSubstring(s string) int {
 	var uniqueSubStr string
 
@@ -25,8 +27,12 @@ func lengthOfLongestSubstring(s string) int {
 
 	for i := 0; i < len(s); i++ {
 		for k := i; k <= len(s); k++ {
-			if isStrCharsUnique(s[i:k]) && len(s[i:k]) > len(uniqueSubStr) {
-				uniqueSubStr = s[i:k]
+			if isStrCharsUnique(s[i:k]) {
+				if len(s[i:k]) > len(uniqueSubStr) {
+					uniqueSubStr = s[i:k]
+				}
+			} else {
+				break
 			}
 		}
 	}
