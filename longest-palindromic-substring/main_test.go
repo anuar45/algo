@@ -12,6 +12,9 @@ type TestCase struct {
 var (
 	testCases = []TestCase{
 		TestCase{"fwiofjwebababoripowef", "babab"},
+		TestCase{"fwiofjwebaabboripowef", "baab"},
+		TestCase{"fwiofjwebaab", "baab"},
+		TestCase{"ccd", "cc"},
 		TestCase{"b", "b"},
 		TestCase{"bb", "bb"},
 	}
@@ -35,3 +38,18 @@ func TestReverseStringQuick(t *testing.T) {
 		t.Errorf("Reverse string failed:\nWant: %s\nGot: %s", want, got)
 	}
 }
+
+func TestLongestPalindromeQuick(t *testing.T) {
+	for i, tc := range testCases {
+		got := longestPalindromeQuick(tc.Data)
+		want := tc.Result
+		if got != want {
+			t.Errorf("Test %d - Incorrect result.\nWant: %v\nGot: %v\n", i, want, got)
+		}
+	}
+}
+
+// func BenchmarkLongestPalindrome(b *testing.B) {
+// 	s := "anugnxshgonmqydttcvmtsoaprxnhpmpovdolbidqiyqubirkvhwppcdyeouvgedccipsvnobrccbndzjdbgxkzdbcjsjjovnhpnbkurxqfupiprpbiwqdnwaqvjbqoaqzkqgdxkfczdkznqxvupdmnyiidqpnbvgjraszbvvztpapxmomnghfaywkzlrupvjpcvascgvstqmvuveiiixjmdofdwyvhgkydrnfuojhzulhobyhtsxmcovwmamjwljioevhafdlpjpmqstguqhrhvsdvinphejfbdvrvabthpyyphyqharjvzriosrdnwmaxtgriivdqlmugtagvsoylqfwhjpmjxcysfujdvcqovxabjdbvyvembfpahvyoybdhweikcgnzrdqlzusgoobysfmlzifwjzlazuepimhbgkrfimmemhayxeqxynewcnynmgyjcwrpqnayvxoebgyjusppfpsfeonfwnbsdonucaipoafavmlrrlplnnbsaghbawooabsjndqnvruuwvllpvvhuepmqtprgktnwxmflmmbifbbsfthbeafseqrgwnwjxkkcqgbucwusjdipxuekanzwimuizqynaxrvicyzjhulqjshtsqswehnozehmbsdmacciflcgsrlyhjukpvosptmsjfteoimtewkrivdllqiotvtrubgkfcacvgqzxjmhmmqlikrtfrurltgtcreafcgisjpvasiwmhcofqkcteudgjoqqmtucnwcocsoiqtfuoazxdayricnmwcg"
+// 	got :=
+// }
