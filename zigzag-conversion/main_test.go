@@ -5,51 +5,27 @@ import (
 )
 
 type TestCase struct {
-	input string
-	rows int
-	result string
+	A string
+	B int
+	R string
 }
 
 var (
 	testCases = []TestCase{
 		{
-			"abcdefgh",
+			"PAYPALISHIRING",
 			3,
-			"""
-a e g
-bdf 
-c
-""",
+			"PAHNAPLSIIGYIR",
 		},
 	}
 )
 
-func TestFindMedianSortedArraysDumb(t *testing.T) {
+func TestZigZagCon(t *testing.T) {
 	for i, tc := range testCases {
-		got := findMedianSortedArraysDumb(tc.A, tc.B)
+		got := ZigZagCon(tc.A, tc.B)
 		want := tc.R
 		if got != want {
-			t.Errorf("Error in test case number %d\nInput: %v\n Want: %f\nGot: %f", i, tc, want, got)
-		}
-	}
-}
-
-func TestFindMedianSortedArraysRecursive(t *testing.T) {
-	for i, tc := range testCases {
-		got := findMedianSortedArraysRecursive(tc.A, tc.B)
-		want := tc.R
-		if got != want {
-			t.Errorf("Error in test case number %d\nInput: %v\n Want: %f\nGot: %f", i, tc, want, got)
-		}
-	}
-}
-
-func TestFindMedianSortedArraysQuick(t *testing.T) {
-	for i, tc := range testCases {
-		got := findMedianSortedArraysQuick(tc.A, tc.B)
-		want := tc.R
-		if got != want {
-			t.Errorf("Error in test case number %d\nInput: %v\n Want: %f\nGot: %f", i, tc, want, got)
+			t.Errorf("Error in test case number %d\nTestCaseData: %v\n Want: %s\nGot: %s", i, tc, want, got)
 		}
 	}
 }
