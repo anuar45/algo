@@ -10,9 +10,10 @@ func main() {
 
 func ZigZagCon(s string, n int) string {
 	var r string
+	var i, j, k int
 
-	for i := n; i >= 0; i-- {
-		for k := 0; k <= len(r); {
+	for i = n + 1; i > 0; i = i - 2 {
+		for k = j; k < len(s); {
 			r += string(s[k])
 			k += i
 		}
