@@ -10,12 +10,15 @@ func main() {
 
 func ZigZagCon(s string, n int) string {
 	var r string
-	var i, j, k int
+	var i, k, j, l int
+	var sl [][]rune
 
-	for i = n + 1; i > 0; i = i - 2 {
-		for k = j; k < len(s); {
-			r += string(s[k])
-			k += i
+	for i = 0; i < len(s); i++ {
+		k++
+		if k == n {
+			:w
+
+			k=0
 		}
 	}
 
