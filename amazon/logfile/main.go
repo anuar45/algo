@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -18,23 +20,34 @@ func main() {
 	data, _ := ioutil.ReadAll(f)
 
 	lines := strings.Split(string(data), "\n")
+	//fmt.Println(lines)
+	dedup := make(map[string]LogEntry)
 
-	dedup := make(map[string][]string)
 	for _, line := range lines {
+		s := strings.Split(line, "=")
+		//fmt.Println(s)
+		user := s[0]
+		value, _ := strconv.Atoi(s[1])
 
-		dedup[line] = strings.Split(line, "=")
+		logEntry := LogEntry{
+			User:  user,
+			Value: value,
+			Raw:   line,
+		}
+		dedup[line] = logEntry
 	}
 
 	var log []LogEntry
 
-	for k, v := range dedup {
-		logEntry := LogEntry{
-			User:  v[0],
-			Value: v[1],
-			Raw:   k,
-		}
-		log = append(log, logEntry)
+	for _, v := range dedup {
+		log = append(log, v)
 	}
 
-	fmt.Println(log)
+	sort.Slice(log, func(i, j int) bool {
+		return log[i].Value < log[j].Value
+	})
+
+	for _, entry := range log {
+		fmt.Println(entry.Raw)
+	}
 }
