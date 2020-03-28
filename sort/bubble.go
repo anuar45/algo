@@ -1,4 +1,4 @@
-package main
+package sort
 
 import (
 	"fmt"
@@ -6,17 +6,7 @@ import (
 	"time"
 )
 
-func main() {
-	input := []int{4, 9, 6, 1, 3, 7, 5, 8}
-	animals := []string{"tiger", "lion", "cat", "cheetah"}
-	fmt.Println(sortBubble(input))
-	fmt.Println(sortBubbleOpt(input))
-	fmt.Println(sortStd(input))
-	fmt.Println(sortBubbleString(animals))
-	fmt.Println(sortBubbleReverse(input))
-}
-
-func sortBubble(input []int) []int {
+func Bubble(input []int) []int {
 	arr := make([]int, len(input))
 	copy(arr, input)
 	tStart := time.Now()
@@ -34,7 +24,7 @@ func sortBubble(input []int) []int {
 	return arr
 }
 
-func sortBubbleOpt(input []int) []int {
+func BubbleOpt(input []int) []int {
 	arr := make([]int, len(input))
 	copy(arr, input)
 	var isSorted bool
@@ -55,7 +45,7 @@ func sortBubbleOpt(input []int) []int {
 	return arr
 }
 
-func sortStd(input []int) []int {
+func Std(input []int) []int {
 	arr := make([]int, len(input))
 	copy(arr, input)
 	start := time.Now()
@@ -65,7 +55,7 @@ func sortStd(input []int) []int {
 	return arr
 }
 
-func sortBubbleString(input []string) []string {
+func BubbleString(input []string) []string {
 	arr := make([]string, len(input))
 	copy(arr, input)
 	var isSorted bool
@@ -86,7 +76,7 @@ func sortBubbleString(input []string) []string {
 	return arr
 }
 
-func sortBubbleReverse(input []int) []int {
+func BubbleReverse(input []int) []int {
 	arr := make([]int, len(input))
 	copy(arr, input)
 	var isSorted bool
