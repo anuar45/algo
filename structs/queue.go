@@ -25,3 +25,7 @@ func (q *Queue) Dequeue() (interface{}, error) {
 	err = q.l.RemoveLast()
 	return v, err
 }
+
+func (q *Queue) Len() int {
+	return q.l.Len()
+}

@@ -9,20 +9,20 @@ import (
 )
 
 type Graph struct {
-	nodes []*Node
-	edges map[*Node][]*Node
+	vertexes []*Vertex
+	edges    map[*Vertex][]*Vertex
 }
 
-type Node struct {
+type Vertex struct {
 	Value interface{}
 }
 
 func NewGraph() *Graph {
-	return &Graph{edges: make(map[*Node][]*Node)}
+	return &Graph{edges: make(map[*Vertex][]*Vertex)}
 }
 
-func (g *Graph) AddNode(v interface{}) error {
-	g.nodes = append(g.nodes, &Node{v})
+func (g *Graph) AddVertex(v interface{}) error {
+	g.vertexes = append(g.vertexes, &Vertex{v})
 	return nil
 }
 
@@ -38,8 +38,8 @@ func (g *Graph) AddEdge(v1, v2 interface{}) error {
 	return nil
 }
 
-func (g *Graph) find(v interface{}) *Node {
-	for _, n := range g.nodes {
+func (g *Graph) find(v interface{}) *Vertex {
+	for _, n := range g.vertexes {
 		if reflect.DeepEqual(v, n.Value) {
 			return n
 		}
@@ -47,15 +47,15 @@ func (g *Graph) find(v interface{}) *Node {
 	return nil
 }
 
-func (n *Node) String() string {
+func (n *Vertex) String() string {
 	return fmt.Sprintf("%v", n.Value)
 }
 
 func (g *Graph) String() string {
 	s := ""
-	for i := 0; i < len(g.nodes); i++ {
-		s += g.nodes[i].String() + " -> "
-		near := g.edges[g.nodes[i]]
+	for i := 0; i < len(g.vertexes); i++ {
+		s += g.vertexes[i].String() + " -> "
+		near := g.edges[g.vertexes[i]]
 		for j := 0; j < len(near); j++ {
 			s += near[j].String() + " "
 		}
@@ -64,10 +64,29 @@ func (g *Graph) String() string {
 	return s
 }
 
-func (g *Graph) TraverseBFS() {
+func (g *Graph) TraverseBFS(start interface{}) {
 	q := structs.NewQueue()
-	q.Enqueue(g.nodes[0])
 
+	startVertex := g.find(start)
+
+	q.Enqueue(startVertex)
+
+	visited := make(map[*Vertex]bool)
+
+	for q.Len() != 0 {
+		qVal, _ := q.Dequeue()
+		currVertex := qVal.(*Vertex)
+		visited[currVertex] = true
+
+		for _, v := range g.edges[currVertex] {
+			if !visited[v] {
+				q.Enqueue(v)
+				visited[v] = true
+			}
+		}
+	}
+
+	fmt.Println(visited)
 }
 
 // def bfs(graph, root):

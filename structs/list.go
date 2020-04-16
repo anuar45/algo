@@ -145,3 +145,19 @@ func (l *List) RemoveLast() error {
 
 	return nil
 }
+
+// Len returns lenght of list
+func (l *List) Len() int {
+	if l.root == nil {
+		return 0
+	}
+
+	count := 1
+	currNode := l.root
+
+	for currNode.Next != nil {
+		currNode = currNode.Next
+	}
+
+	return count
+}
