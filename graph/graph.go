@@ -65,7 +65,8 @@ func (g *Graph) String() string {
 	return s
 }
 
-func (g *Graph) TraverseBFS(start interface{}) {
+// Traverse graph with BFS
+func (g *Graph) TraverseBFS(start interface{}, f func(*Vertex)) {
 	q := structs.NewQueue()
 
 	startVertex := g.find(start)
@@ -94,9 +95,10 @@ func (g *Graph) TraverseBFS(start interface{}) {
 				visited[v] = true
 			}
 		}
+		if f != nil {
+			f(currVertex)
+		}
 	}
-
-	fmt.Println(visited)
 }
 
 // def bfs(graph, root):

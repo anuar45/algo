@@ -1,6 +1,7 @@
 package graph
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -54,5 +55,7 @@ func TestGraphBFS(t *testing.T) {
 	g.AddEdge(3, 6)
 	g.AddEdge(3, 7)
 
-	g.TraverseBFS(1)
+	g.TraverseBFS(1, func(vertex *Vertex) {
+		fmt.Println(vertex.Value)
+	})
 }
