@@ -2,7 +2,9 @@ package structs
 
 import (
 	"errors"
+	"fmt"
 	"reflect"
+	"strings"
 )
 
 // List of nodes
@@ -99,11 +101,15 @@ func (l *List) Insert(index uint, v interface{}) error {
 
 	if currNode.Prev != nil {
 		nodeNew.Prev = currNode.Prev
-		nodeNew.Prev.Next = nodeNew
+		currNode.Prev.Next = nodeNew
 	}
 
 	currNode.Prev = nodeNew
 	nodeNew.Next = currNode
+
+	if index == 0 {
+		l.root = nodeNew
+	}
 
 	return nil
 }
@@ -160,4 +166,21 @@ func (l *List) Len() int {
 	}
 
 	return count
+}
+
+func (l *List) String() string {
+	var nodes []string
+	if l.root == nil {
+		return ""
+	}
+
+	currNode := l.root
+	nodes = append(nodes, fmt.Sprint(currNode.Value))
+
+	for currNode.Next != nil {
+		currNode = currNode.Next
+		nodes = append(nodes, fmt.Sprint(currNode.Value))
+	}
+
+	return strings.Join(nodes, " ")
 }

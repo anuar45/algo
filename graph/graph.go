@@ -3,6 +3,7 @@ package graph
 import (
 	"errors"
 	"fmt"
+	"log"
 	"reflect"
 
 	"github.com/anuar45/algo/structs"
@@ -69,18 +70,27 @@ func (g *Graph) TraverseBFS(start interface{}) {
 
 	startVertex := g.find(start)
 
-	q.Enqueue(startVertex)
-
+	err := q.Enqueue(startVertex)
+	if err != nil {
+		log.Println(err)
+	}
 	visited := make(map[*Vertex]bool)
 
 	for q.Len() != 0 {
-		qVal, _ := q.Dequeue()
+		//fmt.Println(q)
+		qVal, err := q.Dequeue()
+		if err != nil {
+			log.Println(err)
+		}
 		currVertex := qVal.(*Vertex)
 		visited[currVertex] = true
 
 		for _, v := range g.edges[currVertex] {
 			if !visited[v] {
-				q.Enqueue(v)
+				err = q.Enqueue(v)
+				if err != nil {
+					log.Println(err)
+				}
 				visited[v] = true
 			}
 		}

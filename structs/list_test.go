@@ -66,7 +66,9 @@ func TestListInsert(t *testing.T) {
 
 	l1.Insert(1, 2)
 
-	assert.Equal(t, l1, l2)
+	//fmt.Println(l1)
+
+	assert.Equal(t, l1.String(), l2.String())
 }
 
 func TestListLast(t *testing.T) {

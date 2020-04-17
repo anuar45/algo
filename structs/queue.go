@@ -29,3 +29,7 @@ func (q *Queue) Dequeue() (interface{}, error) {
 func (q *Queue) Len() int {
 	return q.l.Len()
 }
+
+func (q *Queue) String() string {
+	return q.l.String()
+}
