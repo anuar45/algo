@@ -39,7 +39,7 @@ func (l *List) Remove(n int) {
 		l.Head = l.Head.Next
 	}
 
-	curNode := l.Head
+	curNode := l.Head.Next
 	prevNode := l.Head
 	for curNode != nil {
 		if curNode.Value == n {
