@@ -1,24 +1,19 @@
 package solution
 
 func intersect(nums1 []int, nums2 []int) []int {
-	var small, big, intersect, maxIntersect []int
+	var intersect []int
 
-	if len(nums1) > len(nums2) {
-		small = nums2
-		big = nums1
+	m1 := make(map[int]int)
+	for _, n := range nums1 {
+		m1[n]++
 	}
 
-	for i := 0; i < len(big); i++ {
-		for j := 0; j < len(small) && i+j < len(big); j++ {
-			if small[j] == big[i+j] {
-				intersect = append(intersect, small[j])
-			} else {
-				if len(intersect) > len(maxIntersect) {
-					maxIntersect = intersect
-				}
-				intersect = nil
-			}
+	for _, n := range nums2 {
+		if m1[n] != 0 {
+			intersect = append(intersect, n)
+			m1[n]--
 		}
 	}
-	return maxIntersect
+
+	return intersect
 }
