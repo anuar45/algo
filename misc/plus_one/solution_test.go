@@ -18,6 +18,10 @@ func TestPlusOne(t *testing.T) {
 			input: []int{4, 3, 9, 9},
 			want:  []int{4, 4, 0, 0},
 		},
+		{
+			input: []int{9, 9, 9},
+			want:  []int{1, 0, 0, 0},
+		},
 	}
 
 	for _, tt := range tc {

@@ -45,19 +45,20 @@ func dfs(start *Node) []*Node {
 
 	stack.PushFront(start)
 	visited[start] = true
-	visitOrder = append(visitOrder, start)
+	//	visitOrder = append(visitOrder, start)
 
 	for stack.Len() > 0 {
-		for _, n := range elem.Value.(*Node).Friends {
-			elem := stack.Front()
+		elem := stack.Front()
+		node := elem.Value.(*Node)
+		stack.Remove(elem)
+		visitOrder = append(visitOrder, node)
+
+		for _, n := range node.Friends {
 			if !visited[n] {
 				visited[n] = true
 				stack.PushFront(n)
-				visitOrder = append(visitOrder, n)
 			}
 		}
-
-		stack.Remove(elem)
 	}
 
 	return visitOrder
