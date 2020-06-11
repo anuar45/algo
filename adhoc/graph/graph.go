@@ -63,3 +63,57 @@ func dfs(start *Node) []*Node {
 
 	return visitOrder
 }
+
+//////////////////
+
+type Graph struct {
+	AdjList map[int][]int
+}
+
+func (g *Graph) BFSIter(start int) []int {
+	var order []int
+	visited := make(map[int]bool)
+
+	q := list.New()
+
+	q.PushBack(start)
+
+	for q.Len() > 0 {
+		elem := q.Front()
+		q.Remove(elem)
+		vertex := elem.Value.(int)
+		order = append(order, vertex)
+
+		for _, v := range g.AdjList[vertex] {
+			if !visited[v] {
+				q.PushBack(v)
+			}
+		}
+	}
+
+	return order
+}
+
+func (g *Graph) DFSIter(start int) []int {
+	var order []int
+	visited := make(map[int]bool)
+
+	stack := list.New()
+
+	stack.PushFront(start)
+
+	for stack.Len() > 0 {
+		elem := stack.Front()
+		stack.Remove(elem)
+		vertex := elem.Value.(int)
+		order = append(order, vertex)
+
+		for _, v := range g.AdjList[vertex] {
+			if !visited[v] {
+				stack.PushFront(v)
+			}
+		}
+	}
+
+	return order
+}

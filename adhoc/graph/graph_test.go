@@ -40,3 +40,25 @@ func TestDFS(t *testing.T) {
 		fmt.Print(node.Value)
 	}
 }
+
+func TestBFSIter(t *testing.T) {
+	graph := Graph{make(map[int][]int)}
+
+	graph.AdjList[1] = []int{2, 3}
+	graph.AdjList[2] = []int{4, 5}
+	graph.AdjList[3] = []int{6, 7}
+
+	fmt.Println(graph.BFSIter(1))
+
+}
+
+func TestDFSIter(t *testing.T) {
+	graph := Graph{make(map[int][]int)}
+
+	graph.AdjList[1] = []int{2, 3}
+	graph.AdjList[2] = []int{4, 5}
+	graph.AdjList[3] = []int{6, 7}
+
+	fmt.Println(graph.DFSIter(1))
+
+}
