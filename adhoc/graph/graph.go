@@ -117,3 +117,33 @@ func (g *Graph) DFSIter(start int) []int {
 
 	return order
 }
+
+func (g *Graph) Dijkstra(start, target int) {
+	visited := make(map[int]bool)
+	distance := make(map[int]int)
+	w := 1
+	q := list.New()
+
+	q.PushBack(start)
+	distance[start] = 0
+
+	for q.Len() > 0 {
+		vertex := q.Front().Value.(int) // should get closest vertex
+		q.Remove(vertex)
+
+		visited[vertex] = true
+
+		for _, v := range g.AdjList[int] {
+			if !visited[v] {
+				continue
+			}
+
+			q.PushBack(v)
+
+			if distance[vertex]+w > distance[v] {
+				distance[v] = distance[vertex] + w
+			}
+		}
+	}
+
+}
