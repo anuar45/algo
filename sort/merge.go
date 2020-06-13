@@ -34,14 +34,12 @@ func Merge(nums1, nums2 []int) []int {
 
 // MergeSort sorting using two-way merge
 func MergeSort(nums []int) []int {
-	var m1, m2 []int
-
 	if len(nums) == 1 {
 		return nums
 	}
 
 	mid := len(nums) / 2
-	m1 = MergeSort(nums[:mid])
-	m2 = MergeSort(nums[mid:])
+	m1 := MergeSort(nums[:mid])
+	m2 := MergeSort(nums[mid:])
 	return Merge(m1, m2)
 }
