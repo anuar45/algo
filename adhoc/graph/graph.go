@@ -2,6 +2,7 @@ package graph
 
 import (
 	"container/list"
+	"fmt"
 	// "fmt"
 )
 
@@ -118,7 +119,7 @@ func (g *Graph) DFSIter(start int) []int {
 	return order
 }
 
-func (g *Graph) Dijkstra(start, target int) {
+func (g *Graph) Dijkstra(start, target int) int {
 	visited := make(map[int]bool)
 	distance := make(map[int]int)
 	w := 1
@@ -128,22 +129,28 @@ func (g *Graph) Dijkstra(start, target int) {
 	distance[start] = 0
 
 	for q.Len() > 0 {
-		vertex := q.Front().Value.(int) // should get closest vertex
-		q.Remove(vertex)
+		elem := q.Front() // should get closest vertex
+		q.Remove(elem)
+
+		vertex := elem.Value.(int)
 
 		visited[vertex] = true
 
-		for _, v := range g.AdjList[int] {
-			if !visited[v] {
+		fmt.Println(distance)
+
+		for _, v := range g.AdjList[vertex] {
+			if visited[v] {
 				continue
 			}
 
 			q.PushBack(v)
 
-			if distance[vertex]+w > distance[v] {
+			if _, ok := distance[v]; !ok || distance[vertex]+w < distance[v] {
 				distance[v] = distance[vertex] + w
 			}
 		}
 	}
+
+	return distance[target]
 
 }

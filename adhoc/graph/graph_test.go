@@ -62,3 +62,14 @@ func TestDFSIter(t *testing.T) {
 	fmt.Println(graph.DFSIter(1))
 
 }
+
+func TestDijkstra(t *testing.T) {
+	graph := Graph{make(map[int][]int)}
+
+	graph.AdjList[1] = []int{2, 3}
+	graph.AdjList[2] = []int{4, 5}
+	graph.AdjList[3] = []int{6, 7}
+
+	fmt.Println(graph.Dijkstra(1, 7))
+
+}
