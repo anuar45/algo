@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// Bubble is simple bubble sort
 func Bubble(input []int) []int {
 	arr := make([]int, len(input))
 	copy(arr, input)
@@ -24,6 +25,7 @@ func Bubble(input []int) []int {
 	return arr
 }
 
+// BubbleOpt optimized sort
 func BubbleOpt(input []int) []int {
 	arr := make([]int, len(input))
 	copy(arr, input)
@@ -45,6 +47,7 @@ func BubbleOpt(input []int) []int {
 	return arr
 }
 
+// Std is standard library sort
 func Std(input []int) []int {
 	arr := make([]int, len(input))
 	copy(arr, input)
@@ -55,6 +58,7 @@ func Std(input []int) []int {
 	return arr
 }
 
+// BubbleString is bubble string sort
 func BubbleString(input []string) []string {
 	arr := make([]string, len(input))
 	copy(arr, input)
@@ -76,6 +80,7 @@ func BubbleString(input []string) []string {
 	return arr
 }
 
+// BubbleReverse rbubble everse sort
 func BubbleReverse(input []int) []int {
 	arr := make([]int, len(input))
 	copy(arr, input)
