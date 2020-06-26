@@ -1,17 +1,27 @@
 package solution
 
 func plusOne(digits []int) []int {
-	for i := len(digits) - 1; i >= 0; i-- {
-		if digits[i] == 9 {
-			digits[i] = 0
-			if digits[i] == 9 && i == 0 {
-				digits = append([]int{1}, digits...)
-			}
-			continue
-		}
+	i := len(digits) - 1
+	r := 1
 
+	if digits[i] == 9 {
+		for r != 0 {
+			switch {
+			case i == 0:
+				digits[i] = 0
+				digits = append([]int{1}, digits...)
+				r = 0
+			case digits[i] == 9:
+				digits[i] = 0
+				r = 1
+			case digits[1] != 9:
+				digits[i]++
+				r = 0
+			}
+			i--
+		}
+	} else {
 		digits[i]++
-		break
 	}
 
 	return digits
